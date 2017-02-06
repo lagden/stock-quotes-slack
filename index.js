@@ -13,7 +13,7 @@ let token = process.env.token || false
 let token2 = process.env.token2 || false
 
 const bin = join(__dirname, 'node_modules', 'lagden-stock-quote-cli', 'cli.js')
-const cors = microCors({allowMethods: ['POST']})
+const cors = microCors({allowMethods: ['POST', 'GET']})
 
 function check(data) {
 	if (data && data.token && (data.token === token || data.token === token2)) {
@@ -38,7 +38,6 @@ async function delayed(data) {
 		})
 		.then(res => {
 			process.stdout.write('ok')
-			console.log('ok')
 		})
 		.catch(err => {
 			process.stdout.write(err.message)
