@@ -19,7 +19,7 @@
     "url": "https://github.com/lagden/stock-quote/issues"
   },
   "engines": {
-    "node": ">=6.0.0"
+    "node": "6.9.4"
   },
   "dependencies": {
     "got": "6.7.1",
