@@ -9,13 +9,19 @@ const streamToPromise = require('stream-to-promise')
 const got = require('got')
 
 // require('now-logs')('chuchu-blz')
+let token = process.env.token || false
+let token2 = process.env.token2 || false
 
-const slack = require('./_slack.json')
+if (token === false && token2 === false) {
+	{token, token2} = require('./_slack.json')
+}
+
+const slack =
 const bin = join(__dirname, 'node_modules', 'lagden-stock-quote-cli', 'cli.js')
 const cors = microCors({allowMethods: ['POST']})
 
 function check(data) {
-	if (data && data.token && (data.token === slack.token || data.token === slack.token2)) {
+	if (data && data.token && (data.token === token || data.token === token2)) {
 		return Promise.resolve()
 	}
 	return Promise.reject(new Error('Token inválido'))
