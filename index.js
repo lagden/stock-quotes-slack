@@ -12,11 +12,6 @@ const got = require('got')
 let token = process.env.token || false
 let token2 = process.env.token2 || false
 
-if (token === false && token2 === false) {
-	{token, token2} = require('./_slack.json')
-}
-
-const slack =
 const bin = join(__dirname, 'node_modules', 'lagden-stock-quote-cli', 'cli.js')
 const cors = microCors({allowMethods: ['POST']})
 
