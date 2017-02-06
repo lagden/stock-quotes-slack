@@ -18,6 +18,9 @@
   "bugs": {
     "url": "https://github.com/lagden/stock-quote/issues"
   },
+  "engines": {
+    "node": ">=6.0.0"
+  },
   "dependencies": {
     "got": "6.7.1",
     "lagden-stock-quote-cli": "1.0.1",
