@@ -1,0 +1,30 @@
+{
+  "name": "stock-quotes-slack",
+  "version": "1.2.1",
+  "description": "Micro serviço para consultar informações de um papel na Bolsa de Valores",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "micro"
+  },
+  "repository": "lagden/stock-quote-slack",
+  "keywords": [
+    "stock",
+    "quote",
+    "api"
+  ],
+  "author": "Thiago Lagden",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lagden/stock-quote/issues"
+  },
+  "dependencies": {
+    "got": "6.7.1",
+    "lagden-stock-quote-cli": "1.0.1",
+    "micro": "6.2.1",
+    "micro-compress": "1.0.0",
+    "micro-cors": "0.0.1",
+    "now-logs": "0.0.7",
+    "stream-to-promise": "2.2.0"
+  }
+}
