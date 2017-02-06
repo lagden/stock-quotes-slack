@@ -15,7 +15,7 @@ const bin = join(__dirname, 'node_modules', 'lagden-stock-quote-cli', 'cli.js')
 const cors = microCors({allowMethods: ['POST']})
 
 function check(data) {
-	if (data && data.token && data.token === slack.token) {
+	if (data && data.token && (data.token === slack.token || data.token === slack.token2)) {
 		return Promise.resolve()
 	}
 	return Promise.reject(new Error('Token inválido'))
