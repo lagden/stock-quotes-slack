@@ -23,11 +23,10 @@
   },
   "dependencies": {
     "got": "6.7.1",
-    "lagden-stock-quote-cli": "1.0.1",
+    "lagden-stock-quote": "1.1.1",
     "micro": "6.2.1",
     "micro-compress": "1.0.0",
     "micro-cors": "0.0.1",
-    "now-logs": "0.0.7",
     "stream-to-promise": "2.2.0"
   }
 }
