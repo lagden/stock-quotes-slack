@@ -1,11 +1,7 @@
-const {spawn} = require('child_process')
-const {join} = require('path')
 const qs = require('querystring')
-const url = require('url')
 const {send} = require('micro')
 const microCors = require('micro-cors')
 const compress = require('micro-compress')
-const got = require('got')
 const streamToPromise = require('stream-to-promise')
 const stock = require('lagden-stock-quote')
 const slackBody = require('./template')
@@ -22,38 +18,21 @@ function check(data) {
 	return Promise.reject(new Error('Token inválido'))
 }
 
-async function after(data) {
-	const consulta = await stock(data.text)
-	got
-		.post(data.response_url, {
-			headers: {
-				'content-type': 'application/json'
-			},
-			body: JSON.stringify({
-				response_type: 'ephemeral',
-				text: slackBody(consulta)
-			}),
-			followRedirect: false
-		})
-		.then(res => {
-			process.stdout.write(res.status)
-		})
-		.catch(err => {
-			process.stdout.write(err.message)
-		})
-}
-
 async function quote(req, res) {
 	try {
 		const post = await streamToPromise(req)
 		const data = qs.parse(post.toString('utf8'))
 		const checked = await check(data)
-		if (checked) {
-			after(data)
-		}
-		send(res, 200, "localizando a cotação...")
+		const consulta = await stock(data.text)
+		send(res, 200, {
+			response_type: 'ephemeral',
+			text: slackBody(consulta)
+		})
 	} catch (err) {
-		send(res, 400, err.message)
+		send(res, 400, {
+			response_type: 'ephemeral',
+			text: err.message
+		})
 	}
 }
 
