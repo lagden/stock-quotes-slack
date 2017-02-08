@@ -7,7 +7,7 @@ function slackBody(data) {
 			`:_vol: ${data.volume} :_time: ${data.hora}`
 		].join('')
 	}
-	return '✖ cotação não encontrada'
+	return '✖ Cotação não encontrada'
 }
 
 module.exports = slackBody

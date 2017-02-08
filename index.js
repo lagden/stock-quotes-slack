@@ -31,7 +31,7 @@ async function quote(req, res) {
 	} catch (err) {
 		send(res, 400, {
 			response_type: 'ephemeral',
-			text: err.message
+			text: `✖ ${err.message}`
 		})
 	}
 }

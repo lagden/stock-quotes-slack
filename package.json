@@ -1,6 +1,6 @@
 {
   "name": "stock-quotes-slack",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "description": "Micro serviço para consultar informações de um papel na Bolsa de Valores",
   "main": "index.js",
   "scripts": {
