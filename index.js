@@ -25,12 +25,12 @@ async function quote(req, res) {
 		const checked = await check(data)
 		const consulta = await stock(data.text)
 		send(res, 200, {
-			response_type: 'ephemeral',
+			response_type: 'in_channel',
 			text: slackBody(consulta)
 		})
 	} catch (err) {
 		send(res, 400, {
-			response_type: 'ephemeral',
+			response_type: 'in_channel',
 			text: `✖ ${err.message}`
 		})
 	}
