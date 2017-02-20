@@ -7,11 +7,11 @@ function slackBody(data) {
 		// 	`:_vol: ${data.volume} :_time: ${data.hora}`
 		// ].join('')
 		return [
-			`*${data.papel}*  :cotacao: ${data.ultimo}`,
-			` ${/^-/.test(data.variacao) ? ':negativo:' : ':positivo:'} ${data.variacao}`,
-			` :max: ${data.max} :min: ${data.min}`,
-			` :abertura: ${data.abertura} :fechamento: ${data.fechamento}`,
-			` :volume: ${data.volume} :hora: ${data.hora}`
+			`*${data.papel}*  :cotacao: ${data.ultimo} `,
+			`${/^-/.test(data.variacao) ? ':negativo:' : ':positivo:'} ${data.variacao}\n`,
+			`:max: ${data.max} :min: ${data.min}\n`,
+			`:abertura: ${data.abertura} :fechamento: ${data.fechamento}\n`,
+			`:volume: ${data.volume} :hora: ${data.hora}`
 		].join('')
 	}
 	return '✖ Cotação não encontrada'
