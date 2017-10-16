@@ -15,11 +15,11 @@ function consultaEnvia(data) {
 				response_type: 'in_channel',
 				text: template(consulta)
 			}
+		}))
 		.catch(err => {
 			console.error(err.message)
 		})
-	}))
-	return `:hourglass: buscando ação...`
+	return ':hourglass: buscando ação...'
 }
 
 async function quote(req, res) {
