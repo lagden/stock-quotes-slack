@@ -42,7 +42,7 @@ async function quote(req, res) {
 		})
 	} catch (err) {
 		// Responde o erro
-		send(res, 400, {
+		send(res, 404, {
 			response_type: 'ephemeral',
 			text: `✖ ${err.message}`
 		})
@@ -51,7 +51,7 @@ async function quote(req, res) {
 
 // Evita inatividade
 setInterval(() => {
-	got.post('http://127.0.0.1:5000', {
+	got.post('https://slash-cotacao.herokuapp.com', {
 		form: true,
 		body: {
 			token: 'test',
