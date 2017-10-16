@@ -27,11 +27,6 @@ async function quote(req, res) {
 		// Faz a consulta no serviço
 		const consulta = await stock(data.text)
 
-		console.log('--------------')
-		console.log(data)
-		console.log(consulta)
-		console.log('++++++++++++++')
-
 		// Faz um post da resposta para o Slack
 		await got.post(data.response_url, {
 			json: true,
@@ -42,7 +37,7 @@ async function quote(req, res) {
 		})
 	} catch (err) {
 		// Responde o erro
-		send(res, 404, {
+		send(res, err.statusCode || 404, {
 			response_type: 'ephemeral',
 			text: `✖ ${err.message}`
 		})
@@ -54,12 +49,12 @@ setInterval(() => {
 	got.post('https://slash-cotacao.herokuapp.com', {
 		form: true,
 		body: {
-			token: 'test',
+			token: process.env.token,
 			text: 'vale5'
 		}
 	})
 		.then(console.log)
 		.catch(console.error)
-}, 6 * 1000)
+}, 60 * 1000)
 
 module.exports = quote
