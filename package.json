@@ -4,8 +4,8 @@
   "description": "Micro serviço para consultar informações de um papel na Bolsa de Valores",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "micro -p ${PORT:-3000}"
+    "test": "xo",
+    "start": "NODE_ENV=production micro -p ${PORT:-5000}"
   },
   "repository": "lagden/stock-quote-slack",
   "keywords": [
@@ -19,13 +19,30 @@
     "url": "https://github.com/lagden/stock-quote/issues"
   },
   "engines": {
-    "node": "6.9.4"
+    "node": "8.6.0"
   },
   "dependencies": {
+    "got": "7.1.0",
     "lagden-stock-quote": "1.1.1",
-    "micro": "6.2.1",
-    "micro-compress": "1.0.0",
-    "micro-cors": "0.0.1",
-    "stream-to-promise": "2.2.0"
+    "micro": "9.0.0"
+  },
+  "devDependencies": {
+    "xo": "0.18.2"
+  },
+  "xo": {
+    "semicolon": false,
+    "esnext": true,
+    "env": [
+      "node",
+      "es6"
+    ],
+    "rules": {
+      "camelcase": [
+        "error",
+        {
+          "properties": "never"
+        }
+      ]
+    }
   }
 }
