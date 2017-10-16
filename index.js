@@ -5,7 +5,7 @@ const stock = require('lagden-stock-quote')
 const template = require('./template')
 const isValid = require('./lib/valid')
 
-function consultaEnvia(data) {
+function _consulta(data) {
 	// Faz a consulta no serviço
 	stock(data.text)
 		// Faz um post da resposta para o Slack
@@ -38,7 +38,7 @@ async function quote(req, res) {
 		// Responde para o Slack dizendo que está processando
 		send(res, 200, {
 			response_type: 'ephemeral',
-			text: consultaEnvia(data)
+			text: _consulta(data)
 		})
 	} catch (err) {
 		// Responde o erro
@@ -55,7 +55,7 @@ setInterval(() => {
 		.post('https://slash-cotacao.herokuapp.com', {
 			form: true,
 			body: {
-				token: process.env.token,
+				token: 'invalid_token',
 				text: 'vale5'
 			}
 		})
