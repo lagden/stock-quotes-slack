@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "xo",
-    "start": "NODE_ENV=production micro -p ${PORT:-5000}"
+    "start": "micro -p ${PORT:-5000}"
   },
   "repository": "lagden/stock-quote-slack",
   "keywords": [
