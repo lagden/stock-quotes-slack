@@ -19,7 +19,7 @@ function _consulta(data) {
 		.catch(err => {
 			console.error(err.message)
 		})
-	return ':hourglass: buscando ação...'
+	return ':hourglass: buscando cotação...'
 }
 
 async function quote(req, res) {
