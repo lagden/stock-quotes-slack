@@ -13,7 +13,7 @@ Cotações da Bolsa de Valores via Slack
 
 ### Via Slack
 
-`/cotacao [vale5]`
+`/cotacao vale5`
 
 
 ## Team
