@@ -27,10 +27,10 @@ async function quote(req, res) {
 		// Faz a consulta no serviço
 		const consulta = await stock(data.text)
 
-		// console.log('--------------')
-		// console.log(data)
-		// console.log(consulta)
-		// console.log('++++++++++++++')
+		console.log('--------------')
+		console.log(data)
+		console.log(consulta)
+		console.log('++++++++++++++')
 
 		// Faz um post da resposta para o Slack
 		await got.post(data.response_url, {
