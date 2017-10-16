@@ -5,7 +5,7 @@ const stock = require('lagden-stock-quote')
 const template = require('./template')
 const isValid = require('./lib/valid')
 
-function asyncCall(data) {
+function consultaEnvia(data) {
 	// Faz a consulta no serviço
 	stock(data.text)
 		// Faz um post da resposta para o Slack
@@ -19,6 +19,7 @@ function asyncCall(data) {
 			console.error(err.message)
 		})
 	}))
+	return `:hourglass: buscando ação...`
 }
 
 async function quote(req, res) {
@@ -37,11 +38,8 @@ async function quote(req, res) {
 		// Responde para o Slack dizendo que está processando
 		send(res, 200, {
 			response_type: 'ephemeral',
-			text: `:hourglass: buscando ação...`
+			text: consultaEnvia(data)
 		})
-
-		// Consulta e Posta
-		asyncCall(data)
 	} catch (err) {
 		// Responde o erro
 		send(res, err.statusCode || 404, {
