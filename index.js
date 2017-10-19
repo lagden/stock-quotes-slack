@@ -5,9 +5,18 @@ const stock = require('lagden-stock-quote')
 const template = require('./template')
 const isValid = require('./lib/valid')
 
+async function _preConsulta(quote) {
+	try {
+		const consulta = await stock(quote)
+		return consulta
+	} catch (err) {
+		return err.message
+	}
+}
+
 function _consulta(data) {
 	// Faz a consulta no serviço
-	stock(data.text)
+	_preConsulta(data.text)
 		// Faz um post da resposta para o Slack
 		.then(consulta => got.post(data.response_url, {
 			json: true,
