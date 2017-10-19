@@ -8,9 +8,9 @@ const isValid = require('./lib/valid')
 async function _preConsulta(quote) {
 	try {
 		const consulta = await stock(quote)
-		return consulta
+		return {ok: true, data: consulta}
 	} catch (err) {
-		return err.message
+		return {ok: false, data: err.message}
 	}
 }
 
@@ -18,11 +18,11 @@ function _consulta(data) {
 	// Faz a consulta no serviço
 	_preConsulta(data.text)
 		// Faz um post da resposta para o Slack
-		.then(consulta => got.post(data.response_url, {
+		.then(res => got.post(data.response_url, {
 			json: true,
 			body: {
-				response_type: 'in_channel',
-				text: template(consulta)
+				response_type: res.ok ? 'in_channel' : 'ephemeral',
+				text: template(res.data)
 			}
 		}))
 		.catch(err => {
