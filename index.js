@@ -1,61 +1,11 @@
-const qs = require('querystring')
-const {send, text} = require('micro')
-const got = require('got')
-const stock = require('lagden-stock-quote')
-const template = require('./template')
-const isValid = require('./lib/valid')
+'use strict'
 
-async function _preConsulta(quote) {
-	try {
-		const consulta = await stock(quote)
-		return {ok: true, data: consulta}
-	} catch (err) {
-		return {ok: false, data: err.message}
-	}
-}
+const micro = require('micro')
+const app = require('./app.js')
 
-function _consulta(data) {
-	// Faz a consulta no serviço
-	_preConsulta(data.text)
-		// Faz um post da resposta para o Slack
-		.then(res => got.post(data.response_url, {
-			json: true,
-			body: {
-				response_type: res.ok ? 'in_channel' : 'ephemeral',
-				text: template(res.data)
-			}
-		}))
-		.catch(err => {
-			console.error(err.message)
-		})
-	return ':hourglass: buscando cotação...'
-}
+const {PORT = 3000} = process.env
+const server = micro(app)
 
-async function quote(req, res) {
-	try {
-		// Parse do Post do Slack
-		const post = await text(req)
-		const data = qs.parse(post)
-
-		// Verifica se o token do Slack é válido
-		if (isValid(data.token) === false) {
-			const err = new Error('Token inválido')
-			err.statusCode = 401
-			throw err
-		}
-
-		// Responde para o Slack dizendo que está processando
-		send(res, 200, {
-			response_type: 'ephemeral',
-			text: _consulta(data)
-		})
-	} catch (err) {
-		// Responde o erro
-		send(res, err.statusCode || 404, {
-			response_type: 'ephemeral',
-			text: `✖ ${err.message}`
-		})
-	}
-}
-
-module.exports = quote
+server.listen(PORT, () => {
+	console.log(`Server listening on port ${server.address().port}`)
+})

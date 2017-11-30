@@ -1,0 +1,12 @@
+{
+  "apps": [{
+    "name": "micro-stock-quotes-v1",
+    "script": "index.js",
+    "max_memory_restart" : "65M",
+    "exec_mode": "fork",
+    "env": {
+      "NODE_ENV": "production",
+      "PORT": "3016"
+    }
+  }]
+}
