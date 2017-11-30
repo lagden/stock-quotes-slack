@@ -58,22 +58,4 @@ async function quote(req, res) {
 	}
 }
 
-// Evita inatividade
-setInterval(() => {
-	got
-		.post('https://slash-cotacao.herokuapp.com', {
-			form: true,
-			body: {
-				token: 'invalid_token',
-				text: 'vale5'
-			}
-		})
-		.then(res => {
-			console.log(res)
-		})
-		.catch(err => {
-			console.error(err.message)
-		})
-}, 60 * 1000)
-
 module.exports = quote
