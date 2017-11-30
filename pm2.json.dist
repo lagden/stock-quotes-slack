@@ -6,7 +6,9 @@
     "exec_mode": "fork",
     "env": {
       "NODE_ENV": "production",
-      "PORT": "3016"
+      "PORT": "3016",
+      "token": "az..123",
+      "token2": "az..123"
     }
   }]
 }
