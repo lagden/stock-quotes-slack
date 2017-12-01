@@ -1,5 +1,6 @@
-app/***
+lib/***
 pm2.json
+app.js
 index.js
-logo.svg
+template.js
 package.json
